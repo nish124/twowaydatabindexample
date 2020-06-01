@@ -1,0 +1,70 @@
+<div *ngIf="!display">
+<div class="grid-container">
+    <div class="grid-item">
+        <input type="text" [(ngModel)]="form.name" pattern="[a-zA-Z ]*" #fname="ngModel" required 
+        placeholder="Enter Firstname">
+        <div [hidden]="fname.valid || fname.pristine" class="alert alert-danger">
+            <div [hidden]="!fname.hasError('required')">First name is required..</div>
+            <div [hidden]="!fname.hasError('pattern')">Only alphabets are allowed..</div>
+        </div>
+    </div>
+    <div class="grid-item">
+        <input type="text" [(ngModel)]="form.lName" required pattern="[a-zA-Z ]*" #lname="ngModel"
+        placeholder="Enter Lastname">
+        <div [hidden]="lname.valid || lname.pristine" class="alert alert-danger">
+            <div [hidden]="!lname.hasError('required')">Last name is required..</div>
+            <div [hidden]="!lname.hasError('pattern')">Only alphabets are allowed..</div>
+        </div>
+    </div>
+    <div class="grid-item">
+        <input type="text" name="address" [(ngModel)]="form.address" #address="ngModel" required
+        placeholder="Enter Address">
+        <div [hidden]="address.valid || address.pristine" class="alert alert-danger">
+               <div [hidden]="!address.hasError('required')">Address is required</div>
+        </div>
+    </div>
+    <div class="grid-item">
+        <input type="tel" [(ngModel)]="form.contactNumber" pattern="[0-9]*" maxlength="10" 
+        #mobile="ngModel" required placeholder="Enter Contact Number">
+        <div [hidden]="mobile.valid || mobile.pristine"
+               class="alert alert-danger">
+            <div [hidden]="!mobile.hasError('required')">Mobile is required</div>
+            <div [hidden]="!mobile.hasError('pattern')">Mobile number should be only numbers..</div>
+        </div>
+    </div>
+
+    <div class="grid-item">
+        <input type="tel" [(ngModel)]="form.tableIterator" pattern="[0-9]*"
+        maxlength="2" placeholder="Enter Table Input"
+        #tablenumber="ngModel" required>
+        <div [hidden]="tablenumber.valid || tablenumber.pristine"
+               class="alert alert-danger">
+            <div [hidden]="!tablenumber.hasError('required')">It is required</div>
+            <div [hidden]="!tablenumber.hasError('pattern')">It should be only numbers..</div>
+        </div>
+    </div>
+</div>
+    <div class="btn-sub-outer">
+        <div>
+            <button type="button" class="btn btn-success btn-block btn-sub" (click)="SaveForm()">Submit</button>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="display">
+    <div class="grid-container">
+        <div class="grid-item">First name : {{ form.name }}</div>
+        <div class="grid-item">Last name : {{ form.lName }}</div>
+        <div class="grid-item">Address : {{ form.address }}</div>
+        <div class="grid-item">Contact number : {{ form.contactNumber }}</div>
+        <div class="grid-item-1">
+            <p style="text-align: center;">Table Input</p>
+            <app-table [value]="form.tableIterator"></app-table>
+        </div>
+    </div>
+    <div class="btn-sub-outer">
+        <div>
+            <button type="button" class="btn btn-success btn-block btn-sub" (click)="refreshPage()">Refresh</button>
+        </div>
+    </div>
+</div>
